@@ -1,5 +1,4 @@
 
-
 // import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
@@ -65,7 +64,7 @@
 //     <div className="min-h-screen flex items-center justify-center bg-[#FFF5EB] dark:bg-gray-900 transition-colors duration-300 px-4 py-10">
 //       <div className="bg-white dark:bg-gray-800 shadow-2xl rounded-2xl overflow-hidden w-full max-w-5xl flex flex-col md:flex-row">
 //         {/* Illustration Section */}
-//         <div className="hidden md:flex border-orange-600 w-1/2 items-center justify-center p-6">
+//         <div className="hidden md:flex border-r-4 border-[#FF4C29] dark:border-yellow-400 w-1/2 items-center justify-center p-6">
 //           <img
 //             src="/assets/chefbro.svg"
 //             alt="Register Illustration"
@@ -179,6 +178,8 @@
 //     </div>
 //   );
 // }
+
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -198,17 +199,16 @@ export default function RegisterPage() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
-    // Clear error as user types
     setErrors({ ...errors, [e.target.name]: "" });
   };
 
   const handleBlur = (e) => {
     setTouched({ ...touched, [e.target.name]: true });
-
-    // Validate the field on blur
     if (!formData[e.target.name]) {
-      setErrors({ ...errors, [e.target.name]: `${e.target.placeholder} is required` });
+      setErrors({
+        ...errors,
+        [e.target.name]: `${e.target.placeholder} is required`,
+      });
     }
   };
 
@@ -225,11 +225,13 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError("");
-
     if (!validateForm()) return;
 
     try {
-      const response = await axios.post("http://localhost:5005/api/auth/register", formData);
+      const response = await axios.post(
+        "http://localhost:5005/api/auth/register",
+        formData
+      );
       if (response.data.status) {
         navigate("/login");
       } else {
@@ -244,12 +246,27 @@ export default function RegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-[#FFF5EB] dark:bg-gray-900 transition-colors duration-300 px-4 py-10">
       <div className="bg-white dark:bg-gray-800 shadow-2xl rounded-2xl overflow-hidden w-full max-w-5xl flex flex-col md:flex-row">
         {/* Illustration Section */}
-        <div className="hidden md:flex border-r-4 border-[#FF4C29] dark:border-yellow-400 w-1/2 items-center justify-center p-6">
+        <div className="hidden md:flex w-1/2 items-center justify-center p-6 bg-white dark:bg-gray-800">
           <img
             src="/assets/chefbro.svg"
             alt="Register Illustration"
             className="w-full max-w-sm"
           />
+        </div>
+
+        {/* Spiral Divider */}
+        <div className="hidden md:flex">
+          <div className="relative w-[20px] flex justify-center items-center">
+            <div className="w-[2px] h-full bg-gray-300 dark:bg-yellow-400"></div>
+            <div className="absolute flex flex-col gap-4">
+              {[...Array(6)].map((_, i) => (
+                <div
+                  key={i}
+                  className="w-3 h-3 border-[2px] border-black dark:border-white rounded-full bg-white dark:bg-gray-800 -ml-1.5"
+                ></div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Form Section */}
@@ -338,7 +355,9 @@ export default function RegisterPage() {
               )}
             </div>
 
-            {submitError && <p className="text-red-500 text-sm text-center">{submitError}</p>}
+            {submitError && (
+              <p className="text-red-500 text-sm text-center">{submitError}</p>
+            )}
 
             <button
               type="submit"
@@ -349,7 +368,10 @@ export default function RegisterPage() {
           </form>
           <p className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
             Already have an account?{" "}
-            <a href="/login" className="text-[#FF4C29] font-medium hover:underline">
+            <a
+              href="/login"
+              className="text-[#FF4C29] font-medium hover:underline"
+            >
               Login
             </a>
           </p>
