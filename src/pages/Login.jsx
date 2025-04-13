@@ -196,10 +196,10 @@ export default function LoginPage() {
       <div className="flex w-full max-w-5xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
         {/* Illustration Section */}
         <div className="w-1/2 relative hidden md:block">
-          <img
-            src="/assets/login-illustration.png" // Replace with your image path
-            alt="Login illustration"
-            className="w-full h-full object-cover"
+        <img
+            src="/assets/chefbro.svg"
+            alt="Login Illustration"
+            className="w-full max-w-sm"
           />
           {/* Wavy SVG Divider */}
           <div className="absolute top-0 right-0 h-full">
