@@ -139,16 +139,16 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-[#FFF5EB] dark:bg-gray-900 text-gray-800 dark:text-white p-6">
-      <header className="mb-8 text-center">
+      {/* <header className="mb-8 text-center">
         <h1 className="text-3xl font-bold text-[#FF4C29]">🍔 Welcome to YummyBite!</h1>
         {user && (
           <p className="text-md text-gray-600 dark:text-gray-300 mt-2">
             Logged in as <span className="font-semibold">{user.firstname} {user.lastname}</span> ({user.email})
           </p>
         )}
-      </header>
+      </header> */}
 
-      <section>
+      {/* <section>
         <h2 className="text-2xl font-semibold mb-4 text-[#FFD93D]">Available Food Items</h2>
         {foodItems.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -165,7 +165,16 @@ export default function DashboardPage() {
         ) : (
           <p className="text-gray-500 dark:text-gray-400">No food items available.</p>
         )}
-      </section>
+      </section> */}
+
+      <div className="w-full flex justify-between">
+        <div className="w-1/4 border h-screen">
+
+        </div>
+        <div className="w-3/4 border h-screen">
+
+        </div>
+      </div>
     </div>
   );
 }
