@@ -101,6 +101,9 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+// import { AppSidebar } from "../components/ui/"
+
 import { useNavigate } from "react-router-dom";
 
 export default function DashboardPage() {
@@ -167,14 +170,13 @@ export default function DashboardPage() {
         )}
       </section> */}
 
-      <div className="w-full flex justify-between">
-        <div className="w-1/4 border h-screen">
-
-        </div>
-        <div className="w-3/4 border h-screen">
-
-        </div>
-      </div>
+<SidebarProvider>
+      {/* <AppSidebar /> */}
+      <main>
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
     </div>
   );
 }
