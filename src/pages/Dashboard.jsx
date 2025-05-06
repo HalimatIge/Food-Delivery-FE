@@ -43,10 +43,10 @@ export default function DashboardPage() {
   return (
     <>
     {/* <Navbar/> */}
-    <div className="min-h-screen bg-[#FFF5EB] dark:bg-gray-900 text-gray-800 dark:text-white p-6">4
+    <div className="min-h-screen bg-[#FFF5EB] dark:bg-gray-900 text-gray-800 dark:text-white p-6 pt-0 md:pt-[80px] pb-[80px] md:pb-0">
    
       <header className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-[#FF4C29]">🍔 Welcome to YummyBite!</h1>
+        <h1 className="text-3xl font-bold text-[#FF4C29]">🍔 Welcome to QuickPlate!</h1>
         {user && (
           <p className="text-md text-gray-600 dark:text-gray-300 mt-2">
             Logged in as <span className="font-semibold">{user.firstname} {user.lastname}</span> ({user.email})

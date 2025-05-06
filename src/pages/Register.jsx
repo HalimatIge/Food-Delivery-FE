@@ -243,7 +243,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FFF5EB] dark:bg-gray-900 transition-colors duration-300 px-4 py-10">
+    <div className="min-h-screen flex items-center justify-center bg-[#FFF5EB] dark:bg-gray-900 transition-colors duration-300 px-4 py-10 pt-0 md:pt-[80px] pb-[80px] md:pb-0">
       <div className="bg-white dark:bg-gray-800 shadow-2xl rounded-2xl overflow-hidden w-full max-w-5xl flex flex-col md:flex-row">
         {/* Illustration Section */}
         <div className="hidden md:flex w-1/2 items-center justify-center p-6 bg-white dark:bg-gray-800">

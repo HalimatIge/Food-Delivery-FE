@@ -33,7 +33,7 @@ export default function Login({ setIsAuthenticated }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FFF5EB] dark:bg-gray-900 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#FFF5EB] dark:bg-gray-900 px-4 pt-0 md:pt-[80px] pb-[80px] md:pb-0">
       <div className="flex w-full max-w-5xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
         <div className="w-1/2 relative hidden md:block">
           <img src="/assets/chefbro.svg" alt="Login Illustration" className="w-full max-w-sm" />

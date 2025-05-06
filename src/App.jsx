@@ -1,82 +1,53 @@
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import Login from "./pages/Login";
-// import Register from './pages/Register';
-// import Home from './pages/Home';
-// import NotFound from './pages/Notfound';
-// import Dashboard from './pages/Dashboard';
-// import ProtectedRoute from './utils/ProtectedRoute';
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import axios from 'axios';
 
-// function App() {
-//   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-//   // Check if user is authenticated on app load
-//   useEffect(() => {
-//     axios.get("http://localhost:5005/api/auth/dashboard", { withCredentials: true })
-//       .then(res => {
-//         if (res.data.status) {
-//           setIsAuthenticated(true);
-//         } else {
-//           setIsAuthenticated(false);
-//         }
-//       })
-//       .catch(() => {
-//         setIsAuthenticated(false);
-//       });
-//   }, []);
-
-//   return (
-//     <Router>
-//       <Routes>
-//         <Route path="/" element={<Home />} />
-//         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-//         <Route path="/register" element={<Register />} />
-//         <Route path="/dashboard" element={
-//           <ProtectedRoute isAuthenticated={isAuthenticated}>
-//             <Dashboard />
-//           </ProtectedRoute>
-//         } />
-//         <Route path="**" element={<NotFound/>} />
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-// export default App;
-
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './component/Navbar';
+import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-// import other pages...
+import NotFound from './pages/Notfound'; 
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(null); // null = loading
 
-  // Optional: auto-check auth on app load
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get('http://localhost:5005/api/auth/me', { withCredentials: true });
-        setIsAuthenticated(res.data.status);
-      } catch {
+        const res = await axios.get("http://localhost:5005/api/auth/me", {
+          withCredentials: true,
+        });
+  
+        if (res.data.status) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (err) {
         setIsAuthenticated(false);
       }
     };
+  
     checkAuth();
   }, []);
+  
+  
+
+  if (isAuthenticated === null) {
+    return <div className="text-center mt-10">Loading...</div>;
+  }
 
   return (
     <Router>
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
       <Routes>
+        <Route path="/dashboard" element={
+          isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />
+        } />
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        {/* Other routes */}
+        
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
