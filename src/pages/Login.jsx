@@ -21,12 +21,35 @@ export default function Login({ setIsAuthenticated }) {
         withCredentials: true,
       });
 
+      // if (res.data.status) {
+      //   setIsAuthenticated(true); // ✅ Set global auth status
+      //   navigate("/dashboard");
+      // } else {
+      //   setError(res.data.message);
+      // }
+      // if (res.data.status) {
+      //   const user = res.data.user;
+      //   setIsAuthenticated(true);
+      
+      //   if (user.role === "admin") {
+      //     navigate("/admin/dashboard");
+      //   } else {
+      //     navigate("/dashboard");
+      //   }
+      // }
+
       if (res.data.status) {
-        setIsAuthenticated(true); // ✅ Set global auth status
-        navigate("/dashboard");
-      } else {
-        setError(res.data.message);
+        const userRes = await axios.get("http://localhost:5005/api/auth/dashboard", { withCredentials: true });
+        setUser(userRes.data.user); // set user in context immediately
+        setIsAuthenticated(true);
+        
+        if (userRes.data.user.role === "admin") {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/dashboard");
+        }
       }
+      
     } catch (err) {
       setError("Login failed. Try again.");
     }

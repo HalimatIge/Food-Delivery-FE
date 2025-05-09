@@ -11,6 +11,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
     try {
       await axios.post('http://localhost:5005/api/auth/logout', {}, { withCredentials: true });
       setIsAuthenticated(false);
+      setUser(null); // clear context
       navigate('/login');
     } catch (err) {
       console.error('Logout failed:', err);

@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import NotFound from './pages/Notfound'; 
+import AdminDashboard from './pages/Admin';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(null); // null = loading
@@ -45,7 +46,8 @@ function App() {
           isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />
         } />
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register/>} />
+        <Route path="/admin/dashboard" element={<AdminDashboard  setIsAuthenticated={setIsAuthenticated}/>} />
         
         <Route path="*" element={<NotFound />} />
       </Routes>
