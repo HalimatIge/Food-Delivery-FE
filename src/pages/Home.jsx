@@ -1,10 +1,19 @@
 import React from 'react'
 import Navbar from "../component/Navbar"
+import HomeCaro from "../component/HomeCarousel"
+
+
+
 
 const Home = () => {
+
+
   return (
-    <div>
-      {/* <Navbar/> */}
+    <div className='mt-16'>
+
+     
+      <HomeCaro/>
+      
     </div>
   )
 }
