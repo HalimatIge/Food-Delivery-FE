@@ -1,68 +1,57 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth } from "./AuthContext"; // Make sure this provides `user`
-import { toast } from "react-toastify";
+import { useAuth } from "./AuthContext";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const { user, authLoading } = useAuth();
   const [cartItems, setCartItems] = useState([]);
-  const { user } = useAuth(); // assumes user._id is available
+  const [hasFetched, setHasFetched] = useState(false); // Prevent refetch loops
 
-  // Load cart from database when user logs in or refreshes
+  // Fetch cart when auth is ready and cart hasn't been fetched yet
   useEffect(() => {
-    const loadCart = async () => {
-      if (user?._id) {
-        try {
-          const res = await axios.get(`/api/cart/${user._id}`);
-          setCartItems(res.data.cart);
-        } catch (error) {
-          console.error("Failed to load cart:", error);
-        }
-      } else {
-        setCartItems([]); // no user = empty cart
-      }
-    };
-
-    loadCart();
-  }, [user]);
-
-  // Save cart to backend whenever it changes
-  useEffect(() => {
-    const saveCart = async () => {
-      if (user?._id) {
-        try {
-          await axios.post(`/api/cart/${user._id}`, { cart: cartItems });
-        } catch (error) {
-          console.error("Failed to save cart:", error);
-        }
-      }
-    };
-
-    if (user?._id) {
-      saveCart();
+    if (!authLoading && user && !hasFetched) {
+      axios
+        .get(`http://localhost:5005/api/cart/${user._id}`)
+        .then((res) => {
+          setCartItems(res.data.cart || []);
+          setHasFetched(true);
+        })
+        .catch((err) => {
+          console.error("Failed to load cart:", err);
+          setCartItems([]);
+        });
     }
-  }, [cartItems, user]);
+  }, [authLoading, user, hasFetched]);
+
+  // Save cart to backend when it changes
+  useEffect(() => {
+    if (!authLoading && user && hasFetched) {
+      axios
+        .post(`http://localhost:5005/api/cart/${user._id}`, {
+          cart: cartItems,
+        })
+        .catch((err) => console.error("Failed to save cart:", err));
+    }
+  }, [cartItems, user, authLoading, hasFetched]);
 
   const addToCart = (foodItem) => {
     setCartItems((prev) => {
       const exists = prev.find((item) => item._id === foodItem._id);
       if (exists) {
-        toast.info(`${foodItem.name} quantity updated`);
         return prev.map((item) =>
           item._id === foodItem._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        toast.success(`${foodItem.name} added to cart`);
         return [...prev, { ...foodItem, quantity: 1 }];
       }
     });
   };
 
   const removeFromCart = (id) => {
-    toast.info("Item removed from cart");
     setCartItems((prev) => prev.filter((item) => item._id !== id));
   };
 
@@ -74,10 +63,7 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  const clearCart = () => {
-    toast.warn("Cart cleared");
-    setCartItems([]);
-  };
+  const clearCart = () => setCartItems([]);
 
   return (
     <CartContext.Provider
@@ -89,6 +75,9 @@ export const CartProvider = ({ children }) => {
 };
 
 export const useCart = () => useContext(CartContext);
+
+
+
 
 // import { createContext, useContext, useState, useEffect } from "react";
 // import axios from "axios";
