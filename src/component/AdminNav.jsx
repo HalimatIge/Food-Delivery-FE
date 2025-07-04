@@ -21,6 +21,14 @@ const AdminNav = () => {
             Food Management
           </NavLink>
         </li>
+        <li>
+          <NavLink 
+            to="/admin/orders" 
+            className={({ isActive }) => `block p-2 rounded ${isActive ? 'bg-gray-700' : 'hover:bg-gray-700'}`}
+          >
+            Order Management
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

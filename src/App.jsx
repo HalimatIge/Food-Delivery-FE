@@ -14,6 +14,9 @@ import NotFound from './pages/Notfound';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import CheckoutPage from './component/CheckoutPage';
+import OrderPage from './component/OrderPage';
+import AdminOrdersPage from './pages/admin/AdminOrdersPage';
 
 
 function App() {
@@ -30,6 +33,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/orders" element={<OrderPage />} />
 
         
         {/* Admin Routes */}
@@ -38,6 +43,7 @@ function App() {
           <Route path="foods" element={<FoodList />} />
           <Route path="foods/new" element={<AddEditFood />} />
           <Route path="foods/edit/:id" element={<AddEditFood />} />
+          <Route path="orders" element={<AdminOrdersPage />} />
         </Route>
         
         <Route path="*" element={<NotFound />} />
@@ -49,80 +55,3 @@ function App() {
 
 export default App;
 
-// import React from "react";
-// import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-// import Navbar from "./component/Navbar";
-// import Dashboard from "./pages/Dashboard";
-// import Login from "./pages/Login";
-// import Register from "./pages/Register";
-// import NotFound from "./pages/Notfound";
-// import AdminDashboard from "./pages/Admin";
-// import { useAuth } from "./context/AuthContext";
-// import Home from "./pages/Home";
-// import FoodList from "./pages/admin/FoodList";
-// import AddEditFood from "./pages/admin/AddEditFood";
-
-// function App() {
-//   const { user, authLoading } = useAuth();
-  
-//   if (authLoading) return <div className="text-center mt-10">Loading...</div>;
-
-//   return (
-//     <Router>
-//       <Navbar />
-      
-//       <Routes>
-//         <Route path="/" element={<Home />} />
-//         <Route path="/login" element={!user ? <Login /> : <Navigate to={user.role === "admin" ? "/admin/dashboard" : "/dashboard"} />} />
-//         <Route path="/register" element={<Register />} />
-//         <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
-        
-//         {/* Admin Routes */}
-//         <Route path="/admin/dashboard" element={user?.role === "admin" ? <AdminDashboard /> : <Navigate to="/login" />} />
-//         <Route path="/admin/foods" element={user?.role === "admin" ? <FoodList /> : <Navigate to="/login" />} />
-//         <Route path="/admin/foods/new" element={user?.role === "admin" ? <AddEditFood /> : <Navigate to="/login" />} />
-//         <Route path="/admin/foods/edit/:id" element={user?.role === "admin" ? <AddEditFood /> : <Navigate to="/login" />} />
-        
-//         <Route path="*" element={<NotFound />} />
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-// export default App;
-
-
-// import React from "react";
-// import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-
-// import Navbar from "./component/Navbar";
-// import Dashboard from "./pages/Dashboard";
-// import Login from "./pages/Login";
-// import Register from "./pages/Register";
-// import NotFound from "./pages/Notfound";
-// import AdminDashboard from "./pages/Admin";
-// import { useAuth } from "./context/AuthContext";
-// import  Home  from "./pages/Home";
-
-// function App() {
-//   const { user, authLoading } = useAuth();
-  
-//   if (authLoading) return <div className="text-center mt-10">Loading...</div>;
-
-//   return (
-//     <Router>
-//       <Navbar />
-      
-//       <Routes>
-//       <Route path="/" element={<Home />} />
-//         <Route path="/login" element={!user ? <Login /> : <Navigate to={user.role === "admin" ? "/admin/dashboard" : "/dashboard"} />} />
-//         <Route path="/register" element={<Register />} />
-//         <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
-//         <Route path="/admin/dashboard" element={user?.role === "admin" ? <AdminDashboard /> : <Navigate to="/login" />} />
-//         <Route path="*" element={<NotFound />} />
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-// export default App;
