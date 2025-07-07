@@ -62,7 +62,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import FoodItem from "../component/FoodItemCard"; // ✅ import your new component
+import FoodItemCard from "../component/FoodItemCard"; // ✅ import your new component
 
 const Dashboard = () => {
   const { user, authLoading } = useAuth();
@@ -92,7 +92,7 @@ const Dashboard = () => {
       <h2 className="text-xl text-[#FFD93D] mb-6">Available Food Items</h2>
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {foodItems.map((item) => (
-          <FoodItem key={item._id} item={item} />
+          <FoodItemCard key={item._id} item={item} />
         ))}
       </div>
     </div>
