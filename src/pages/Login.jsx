@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 
@@ -141,9 +141,9 @@ export default function Login() {
                 </label>
               </div>
               <div className="text-sm">
-                <a href="#" className="font-medium text-[#FF4C29] hover:text-[#FF7B54] transition-colors duration-200">
+                <Link to="/forgotpassword" className="font-medium text-[#FF4C29] hover:text-[#FF7B54] transition-colors duration-200">
                   Forgot password?
-                </a>
+                </Link>
               </div>
             </div>
             
@@ -212,9 +212,9 @@ export default function Login() {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{' '}
-              <a href="/register" className="font-medium text-[#FF4C29] hover:text-[#FF7B54] transition-colors duration-200">
+              <Link to="/register" className="font-medium text-[#FF4C29] hover:text-[#FF7B54] transition-colors duration-200">
                 Sign up
-              </a>
+              </Link>
             </p>
           </div>
         </div>
@@ -224,67 +224,4 @@ export default function Login() {
 }
 
 
-// import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { useAuth } from "../context/AuthContext";
 
-// export default function Login() {
-//   const navigate = useNavigate();
-//   const { setUser } = useAuth();
-//   const [formData, setFormData] = useState({ email: "", password: "" });
-//   const [error, setError] = useState("");
-
-//   const handleChange = (e) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setError("");
-
-//     try {
-//       const res = await axios.post("http://localhost:5005/api/auth/signin", formData, {
-//         withCredentials: true,
-//       });
-
-//       if (res.data.status) {
-//         const userRes = await axios.get("http://localhost:5005/api/auth/dashboard", {
-//           withCredentials: true,
-//         });
-
-//         const loggedInUser = userRes.data.user;
-//         setUser(loggedInUser);
-
-//         if (loggedInUser.role === "admin") {
-//           navigate("/admin/dashboard");
-//         } else {
-//           navigate("/dashboard");
-//         }
-//       }
-//     } catch (err) {
-//       setError("Login failed. Try again.");
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-[#FFF5EB] px-4 pt-0 md:pt-[80px] pb-[80px]">
-//       <div className="flex w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden">
-//         <div className="w-1/2 relative hidden md:block">
-//           <img src="/assets/chefbro.svg" alt="Login Illustration" className="w-full max-w-sm" />
-//         </div>
-//         <div className="w-full md:w-1/2 p-8">
-//           <h2 className="text-3xl font-bold text-[#FF4C29] text-center mb-4">Welcome Back</h2>
-//           <form onSubmit={handleSubmit} className="space-y-5">
-//             <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange}
-//               className="w-full px-4 py-2 rounded-lg border bg-white" required />
-//             <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange}
-//               className="w-full px-4 py-2 rounded-lg border bg-white" required />
-//             {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-//             <button type="submit" className="w-full py-2 bg-[#FF4C29] text-white rounded-lg">Login</button>
-//           </form>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
