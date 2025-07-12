@@ -322,12 +322,12 @@ export default function UserProfile() {
 
     try {
       const res = await axios.put(
-        "http://localhost:5005/api/auth/profile",
+        "http://localhost:5005/api/auth/update-profile",
         formData,
         { withCredentials: true }
       );
 
-      if (res.data.status) {
+      if (res.data.success) {
         setUser(res.data.user);
         setSuccess("Profile updated successfully!");
         setIsEditing(false);

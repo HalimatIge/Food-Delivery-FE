@@ -33,7 +33,7 @@ const CartPage = () => {
                   <h2 className="text-lg font-semibold text-[#FF4C29]">
                     {item.name}
                   </h2>
-                  <p className="text-sm text-gray-600">${item.price}</p>
+                  <p className="text-sm text-gray-600">₦{item.price}</p>
 
                   <input
                     type="number"
@@ -65,7 +65,7 @@ const CartPage = () => {
             </button>
 
             <p className="font-bold text-xl text-[#FFD93D]">
-              Total: ${total.toFixed(2)}
+              Total: ₦{total.toFixed(2)}
             </p>
           </div>
 

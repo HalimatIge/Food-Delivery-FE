@@ -28,59 +28,7 @@ const AddEditFood = () => {
     }
   }, [id]);
 
-  // const fetchFoodItem = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const res = await axios.get(`http://localhost:5005/api/foodItems/${id}`);
-  //     setForm({
-  //       name: res.data.name,
-  //       price: res.data.price,
-  //       category: res.data.category,
-  //       description: res.data.description,
-  //       available: res.data.available,
-  //       images: res.data.images || [] // Handle existing images
-  //     });
-  //   } catch (err) {
-  //     console.error('Error fetching food item:', err);
-  //     setError('Failed to load food item');
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
-
-
-//   const fetchFoodItem = async () => {
-//   try {
-//     setIsLoading(true);
-//     const res = await axios.get(`http://localhost:5005/api/foodItems/${id}`, {
-//       withCredentials: true
-//     });
-
-//     console.log("Fetched food item:", res.data); // Check this
-
-//     if (res.data) {
-//       setForm({
-//         name: res.data.name || '',
-//         price: res.data.price || '',
-//         category: res.data.category || '',
-//         description: res.data.description || '',
-//         available: res.data.available ?? true,
-//         images: res.data.images || [],
-//         imagePreviews: [],
-//       });
-//     } else {
-//       setError('No food data found');
-//     }
-//   } catch (err) {
-//     console.error('Error fetching food item:', err);
-//     setError('Failed to load food item');
-//   } finally {
-//     setIsLoading(false);
-//   }
-// };
-
-
+  
 
   const fetchFoodItem = async () => {
   try {
@@ -148,64 +96,6 @@ const AddEditFood = () => {
     setForm(prev => ({ ...prev, imagePreviews: newPreviews }));
   };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setIsLoading(true);
-//     setError(null);
-    
-//     try {
-//       const formData = new FormData();
-      
-//       // Append text fields
-// //      Object.keys(form).forEach(key => {
-// //   if (key !== 'imagePreviews' && key !== 'images') {
-// //     const value = form[key];
-// //     formData.append(key, typeof value === 'object' ? JSON.stringify(value) : String(value));
-// //   }
-// // });
-
-
-
-// formData.append('name', form.name);
-// formData.append('price', String(form.price));
-// formData.append('category', form.category);
-// formData.append('description', form.description);
-// formData.append('available', String(form.available));
-
-
-      
-//       // Append image files if they exist
-//       if (imageFiles.length === 0 && form.images.length > 0) {
-//   formData.append('existingImages', JSON.stringify(form.images));
-// }
-
-
-//       const config = {
-//   headers: {
-//     'Content-Type': 'multipart/form-data',
-//   },
-//   withCredentials: true,
-// };
-
-
-//       if (id) {
-//         // For update, include existing images if no new ones are added
-//         if (imageFiles.length === 0 && form.images) {
-//           formData.append('existingImages', JSON.stringify(form.images));
-//         }
-//         await axios.put(`http://localhost:5005/api/foodItems/${id}`, formData, config);
-//       } else {
-//         await axios.post('http://localhost:5005/api/foodItems/add', formData, config);
-//       }
-
-//       navigate('/admin/foods');
-//     } catch (err) {
-//       console.error('Error submitting form:', err);
-//       setError(err.response?.data?.message || 'An error occurred');
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -354,7 +244,7 @@ const handleSubmit = async (e) => {
           </div>
           
           <div>
-            <label className="block text-sm font-medium mb-1">Price ($)</label>
+            <label className="block text-sm font-medium mb-1">Price (₦)</label>
             <input 
               name="price" 
               type="number" 

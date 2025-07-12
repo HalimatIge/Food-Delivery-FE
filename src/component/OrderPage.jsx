@@ -102,16 +102,7 @@ const canCancel = (createdAt) => {
             </p>
 
          <div>
-               {/* {order.status === "Pending" && (
-
-
-<button
-  onClick={() => promptCancel(order._id)}
-  className="text-red-500 hover:underline text-sm"
->
-  Cancel Order
-</button>
-)} */}
+             
 
 {canCancel(order.createdAt) && order.status === "Pending" && (
   <button
